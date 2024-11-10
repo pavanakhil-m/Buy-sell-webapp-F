@@ -1,23 +1,18 @@
+//what all categories in our app?
+
 const CategoryData = [
     "Electronics",
     "Vehicles",
     "Tickets",
     "Rentals",
-    "Jobs",,
     "Fashion",
-    "Home",
-    "Garden",
     "Pets",
-    "Others",
     "Books",
     "Sports",
-    "Music",
-    "Movies",
     "Games",
-    "Health",
     "Beauty",
     "Toys",
-    "Tools",
+    "Others",
 ]
 
 export default CategoryData;

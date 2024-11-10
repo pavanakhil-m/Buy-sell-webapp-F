@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card } from "./components/Card";
 import { Category } from "./components/Category";
 import { CategorySelect } from "./components/CategorySelect";
@@ -6,8 +6,15 @@ import { NavBar } from "./components/NavBar";
 import { SlideShow } from "./components/SlideShow";
 import { CardData } from "./data/CardData";
 import { SellForm } from "./components/SellForm";
+import { ProfilePane } from "./components/ProfilePane";
+import { FullProduct } from "./components/FullProduct";
 
 function Demo() {
+    localStorage.setItem("userName",  "pmunab753" );
+    localStorage.setItem("auth_token"," ");
+
+
+    
     const [category, setCategory] = useState({
         Vehicles: false,
         Electronics: false,
@@ -18,29 +25,58 @@ function Demo() {
         Rentals: false,
     });
 
-    const [formSlected, setFormSelected] = useState(false);
 
+    //for displaying adding product page - mainly for displaying
+    const [formSelected, setFormSelected] = useState(false);
     function onFormSelect() {
         setFormSelected(true);
     }
-
     function onCrossSelect() {
         setFormSelected(false);
     }
 
-    const [selectedCategory, setSelectedCategory] = useState(null);
+    //for profile side pane -> mainly for displaying
+    const [profileSelected, setProfileSelected] = useState(false);
+    function onProfileSelect() {
+        setProfileSelected(true);
+    }
+    function onProfileCrossSelect() {
+        setProfileSelected(false);
+    }
 
+    //for product details, and which product is selected.
+    const [selectedProduct, setSelectedProduct] = useState(null); 
+
+    function handleCardClick(product) {
+        setSelectedProduct(product); 
+    }
+
+    function closeProductDetail() {
+        setSelectedProduct(null); 
+    }
+
+    useEffect(() => {
+        if (selectedProduct || formSelected || profileSelected) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "auto";
+        }
+
+        return () => (document.body.style.overflow = "auto");
+    }, [selectedProduct || formSelected || profileSelected]);
+
+
+
+    const [selectedCategory, setSelectedCategory] = useState(null);
     function handleCategorySelect(selectedCategory) {
         setCategory((prev) => {
             const isCurrentlySelected = prev[selectedCategory];
-
             const newCategoryState = Object.keys(prev).reduce((acc, key) => {
                 acc[key] = key === selectedCategory ? !isCurrentlySelected : false;
                 return acc;
             }, {});
 
             setSelectedCategory(isCurrentlySelected ? null : selectedCategory);
-
             return newCategoryState;
         });
     }
@@ -49,31 +85,34 @@ function Demo() {
 
     return (
         <div className="relative">
-            <NavBar onFormSelect={onFormSelect} />
-            {formSlected && <SellForm onCrossSelect={onCrossSelect} />}
+            <NavBar onFormSelect={onFormSelect} onProfileSelect={onProfileSelect} />
+            {formSelected && <SellForm onCrossSelect={onCrossSelect} />}
             <SlideShow />
+            {profileSelected && <ProfilePane isOpen={profileSelected} onClose={onProfileCrossSelect} />}
 
             <div className="pt-8 pb-8 flex justify-center"> 
-                <Category onHandleSelect={handleCategorySelect} categoryName={category}/>
+                <Category onHandleSelect={handleCategorySelect} categoryName={category} />
             </div>
 
+            {/*here we have to replace carddata with backend data from the server -we can use state to save and display that data or something else*/}
             {!isCategorySelected ? (
+                <>
+                <div className="text-xl ml-24 mb-4"><h1>Recently Added </h1></div>
                 <div className="flex flex-wrap justify-center gap-8">
                     {CardData.map((card, index) => (
-                        <Card key={index} props={card} />
+                        
+                        <Card key={index} props={card} onProdClick={()=>handleCardClick(card)}/>
                     ))}
                 </div>
+                </>
             ) : (
-                <CategorySelect categoryName={selectedCategory} />
+                <CategorySelect categoryName={selectedCategory} onProdClick={handleCardClick} />
+            )}
+             {selectedProduct && (
+                <FullProduct product={selectedProduct} onClose={closeProductDetail} />
             )}
 
-            <div>
-                {Array.from({ length: 30 }, (_, i) => (
-                    <div key={i} className={`p-2 h-24 ${i % 2 === 0 ? 'bg-red-300' : 'bg-blue-300'}`}>
-                        Content Line {i + 1}
-                    </div>
-                ))}
-            </div>
+            
         </div>
     );
 }

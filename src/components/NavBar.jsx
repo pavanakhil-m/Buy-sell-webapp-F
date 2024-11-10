@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 
-export const NavBar = ({onFormSelect}) => {
+export const NavBar = ({onFormSelect, onProfileSelect}) => {
   const [isShrunk, setIsShrunk] = useState(false);
+  const userName = localStorage.getItem("userName");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -10,7 +11,6 @@ export const NavBar = ({onFormSelect}) => {
 
     window.addEventListener('scroll', handleScroll);
 
-    // Clean up the event listener
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -37,7 +37,7 @@ export const NavBar = ({onFormSelect}) => {
                        onClick={onFormSelect}>
                           SELL
                 </button></div>
-          {!isShrunk && <div>Profile</div>}
+          {!isShrunk && <div ><button onClick={onProfileSelect}>{userName}</button></div>}
         </div>
       </div>
 

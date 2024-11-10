@@ -1,6 +1,13 @@
 export const SellForm = ({ onCrossSelect }) => {
+
+
+    // const NtId = localStorage.getItem("NtId");
     function handleSubmit() {
+
+        
+
         onCrossSelect();
+
         
     }
     return (
@@ -24,6 +31,7 @@ export const SellForm = ({ onCrossSelect }) => {
                         <option>Electronics</option>
                         <option>Tickets</option>
                         <option>Rentals</option>
+                        <option>Fashion</option>
                     </select>
 
                     <div class="mb-5 mt-4">

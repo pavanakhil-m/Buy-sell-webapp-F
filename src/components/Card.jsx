@@ -1,15 +1,21 @@
 import logoPng from '../assets/images/bgdrop.png';
 
-export const Card = ({props}) => {
+export const Card = ({props, uniqueId, onProdClick}) => {
 
     const { employeeName, datePosted, tag, title, description } = props;
 
     const truncatedDescription = description.length > 30 ? description.substring(0, 45) + "..." : description;
 
+    function handleClick() {
+        console.log("Card clicked with Unique ID: ", uniqueId);
+        onProdClick();
+
+    }
 
   return (
     <div className="box-border shadow-lg py-4 px-2 rounded-lg flex flex-col relative w-64
-                    transition-transform transform hover:scale-105 hover:shadow-xl">
+                    transition-transform transform hover:scale-105 hover:shadow-xl"
+         onClick={handleClick}>
       <div className="flex justify-center relative">
 
         <img className="w-52 h-48 rounded-md object-cover m-0" 
