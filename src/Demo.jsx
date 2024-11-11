@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Card } from "./components/Card";
 import { Category } from "./components/Category";
 import { CategorySelect } from "./components/CategorySelect";
@@ -8,13 +8,14 @@ import { CardData } from "./data/CardData";
 import { SellForm } from "./components/SellForm";
 import { ProfilePane } from "./components/ProfilePane";
 import { FullProduct } from "./components/FullProduct";
+import { FooterComponent } from "./components/FooterElement";
 
 function Demo() {
-    localStorage.setItem("userName",  "pmunab753" );
-    localStorage.setItem("auth_token"," ");
+    localStorage.setItem("userName", "pmunab753");
+    localStorage.setItem("auth_token", " ");
 
 
-    
+
     const [category, setCategory] = useState({
         Vehicles: false,
         Electronics: false,
@@ -45,14 +46,14 @@ function Demo() {
     }
 
     //for product details, and which product is selected.
-    const [selectedProduct, setSelectedProduct] = useState(null); 
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
     function handleCardClick(product) {
-        setSelectedProduct(product); 
+        setSelectedProduct(product);
     }
 
     function closeProductDetail() {
-        setSelectedProduct(null); 
+        setSelectedProduct(null);
     }
 
     useEffect(() => {
@@ -77,43 +78,56 @@ function Demo() {
             }, {});
 
             setSelectedCategory(isCurrentlySelected ? null : selectedCategory);
+            setProductCategoryHeading(isCategorySelected ? "Recently Added" : selectedCategory);
             return newCategoryState;
         });
     }
 
     const isCategorySelected = selectedCategory !== null;
 
+    const [productCategoryHeading, setProductCategoryHeading] = useState("Recently Added");
+
     return (
-        <div className="relative">
-            <NavBar onFormSelect={onFormSelect} onProfileSelect={onProfileSelect} />
-            {formSelected && <SellForm onCrossSelect={onCrossSelect} />}
-            <SlideShow />
-            {profileSelected && <ProfilePane isOpen={profileSelected} onClose={onProfileCrossSelect} />}
+        <>
+            <div className="relative">
+                <NavBar onFormSelect={onFormSelect} onProfileSelect={onProfileSelect} />
+                {formSelected && <SellForm onCrossSelect={onCrossSelect} />}
+                <SlideShow />
+                {profileSelected && <ProfilePane isOpen={profileSelected} onClose={onProfileCrossSelect} />}
 
-            <div className="pt-8 pb-8 flex justify-center"> 
-                <Category onHandleSelect={handleCategorySelect} categoryName={category} />
-            </div>
-
-            {/*here we have to replace carddata with backend data from the server -we can use state to save and display that data or something else*/}
-            {!isCategorySelected ? (
-                <>
-                <div className="text-xl ml-24 mb-4"><h1>Recently Added </h1></div>
-                <div className="flex flex-wrap justify-center gap-8">
-                    {CardData.map((card, index) => (
-                        
-                        <Card key={index} props={card} onProdClick={()=>handleCardClick(card)}/>
-                    ))}
+                <div className="pt-8 pb-4 flex justify-center">
+                    <Category onHandleSelect={handleCategorySelect} categoryName={category} />
                 </div>
-                </>
-            ) : (
-                <CategorySelect categoryName={selectedCategory} onProdClick={handleCardClick} />
-            )}
-             {selectedProduct && (
-                <FullProduct product={selectedProduct} onClose={closeProductDetail} />
-            )}
 
-            
-        </div>
+                {/*here we have to replace carddata with backend data from the server -we can use state to save and display that data or something else*/}
+                <div className={`flex justify-center pt-1 pb-2 sticky top-16 z-10 `}>
+                    <div className="text-xl flex justify-evenly mb-2 bg-slate-400 h-12 w-[90%] items-center rounded-md ">
+                        <h1>{productCategoryHeading}</h1>
+                    </div>
+                </div>
+
+                {!isCategorySelected ? (
+                    <>
+                        <div className="flex flex-wrap justify-center gap-8">
+                            {CardData.map((card, index) => (
+
+                                <Card key={index} props={card} onProdClick={() => handleCardClick(card)} />
+                            ))}
+                        </div>
+                    </>
+                ) : (
+                    // setHeading={setProductCategoryHeading}
+                    <CategorySelect categoryName={selectedCategory} onProdClick={handleCardClick}  />
+                )}
+                {selectedProduct && (
+                    <FullProduct product={selectedProduct} onClose={closeProductDetail} />
+                )}
+
+
+            </div>
+            <FooterComponent />
+        </>
+
     );
 }
 

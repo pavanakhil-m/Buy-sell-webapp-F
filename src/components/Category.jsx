@@ -10,8 +10,11 @@ export const Category = ({ onHandleSelect, categoryName }) => {
                 {defaultData.map((category, index) => (
                     <div
                         key={index}
-                        className={` rounded-md border-2 min-w-[10rem] flex justify-center items-center mx-4 
-                            ${categoryName[category] ? 'bg-rose-400' : 'bg-slate-200'}`}
+                        className={` rounded-md border-2 min-w-[10rem] flex justify-center items-center mx-4 cursor-pointer
+                            ${categoryName[category] ? 'bg-slate-600 text-slate-200' : 'bg-slate-200'
+                            }`
+                                        
+                        }
                         onClick={() => onHandleSelect(category)}
                     >
                         {category}

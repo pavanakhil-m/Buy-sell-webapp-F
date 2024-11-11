@@ -3,6 +3,14 @@ import logoPng from '../assets/images/bgdrop.png';
 export const FullProduct = ({ product, onClose }) => {
     if (!product) return null;
 
+    function handleInterested() {
+        console.log("I'm Intrested");
+    }
+
+    function handleFavourite() {
+        console.log("Add to favourites");
+    }
+    
     return (
         <div
             className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
@@ -20,6 +28,15 @@ export const FullProduct = ({ product, onClose }) => {
                 <p className="text-gray-500 mb-4">{product.datePosted}</p>
                 <img src={product.image || logoPng} alt="Product" className="w-full h-80 object-cover rounded-md" />
                 <p className="mt-4 text-gray-700">{product.description}</p>
+
+                <div className='flex justify-around items-center mt-4'>
+                    <button className='bg-green-600 text-slate-200 hover:bg-green-500 hover:text-black w-3/5 py-4 rounded-md '
+                            onClick={handleInterested}>
+                                I'm Intrested</button>
+                    <button className='bg-red-600 text-slate-200 hover:bg-red-500 hover:text-black w-1/5 py-4 rounded-md '
+                            onClick={handleFavourite}>
+                                Add to favourites</button>
+                </div>
             </div>
         </div>
     );
