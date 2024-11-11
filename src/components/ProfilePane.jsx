@@ -4,13 +4,14 @@ import userPng from '../assets/images/userpng.png';
 export const ProfilePane = ({ isOpen, onClose }) => {
 
     //getting the username from local storage
-    const userName = localStorage.getItem('userName');
+    const empName = localStorage.getItem('user_name');
     // const userName = 'Akhil';
 
     function handleLogout() {
         //removing the username and token from local storage for login
-        localStorage.removeItem('userName');
         localStorage.removeItem('auth_token');
+        localStorage.removeItem('nt_id');
+        localStorage.removeItem('user_name');
         window.location.reload();
 
     }
@@ -32,7 +33,7 @@ export const ProfilePane = ({ isOpen, onClose }) => {
                 
                 <div className='flex flex-col justify-center items-center mb-8'>
                     <img src={userPng} alt="User" className="w-24 h-24 rounded-full mt-8 mb-4" />
-                    <h1 className="text-white text-2xl">{userName}</h1>
+                    <h1 className="text-white text-2xl">{empName}</h1>
                 </div>
 
                 <div className='flex flex-col justify-center items-center'>

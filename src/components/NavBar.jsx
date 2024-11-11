@@ -8,7 +8,7 @@ export const NavBar = ({ onFormSelect, onProfileSelect }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);//[{title : "no results found"}] //CardData
   const [selectedProductDetails, setSelectedProductDetails] = useState(null);
-  const userName = localStorage.getItem("userName");
+  const userName = localStorage.getItem("user_name");
 
   // Function to handle search form submission with Axios
   const handleSearchSubmit = async (e) => {

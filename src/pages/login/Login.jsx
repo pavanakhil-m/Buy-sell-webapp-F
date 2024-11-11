@@ -20,9 +20,12 @@ const Login = () => {
             password, // use state for password
         })
         .then((response) => {
+        console.log(response)
+
             const { token, userName, ntId} = response.data; // Destructure the token, userName from the response
             if (token) {
                 // Store the token, userName in localStorage
+                console.log("Token received:", token);
                 localStorage.setItem('auth_token', token);
                 localStorage.setItem('user_name', userName);  // Storing userName
                 localStorage.setItem('nt_id', ntId);
