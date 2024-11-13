@@ -60,7 +60,7 @@ export const SellForm = ({ onCrossSelect, onNewProductAdded }) => {
                         required
                     >
                         <option value="">Select Category</option>
-                        <option value="Vehicle">Vehicle</option>
+                        <option value="Vehicles">Vehicles</option>
                         <option value="Electronics">Electronics</option>
                         <option value="Ticket">Ticket</option>
                         <option value="Rentals">Rentals</option>
