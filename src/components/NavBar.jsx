@@ -11,7 +11,7 @@ export const NavBar = ({ onFormSelect, onProfileSelect }) => {
   const [noResultsMessage, setNoResultsMessage] = useState("");
   const userName = localStorage.getItem("user_name");
 
-  // Debounce function to limit API calls during typing
+  
   const debounce = (func, delay) => {
     let debounceTimer;
     return (...args) => {
