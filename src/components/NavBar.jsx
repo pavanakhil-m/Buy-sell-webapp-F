@@ -115,7 +115,7 @@ export const NavBar = ({ onFormSelect, onProfileSelect }) => {
           <div className="flex items-center w-2/6 justify-between pl-16">
             <button>❤️</button>
             <button className="bg-slate-300 text-slate-700 rounded-lg px-4 py-2" onClick={onFormSelect}>
-              SELL
+              Sell
             </button>
             {!isShrunk && (
               <button onClick={onProfileSelect} className="text-white">

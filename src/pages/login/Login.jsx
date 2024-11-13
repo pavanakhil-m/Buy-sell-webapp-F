@@ -53,7 +53,7 @@ const Login = () => {
     return (
         <div className="h-screen w-screen bg-slate-400">
         <section className=" flex flex-col justify-center items-center absolute top-1/4 left-1/3 p-8 bg-slate-700 rounded-lg shadow-lg">
-            <h1 className="text-3xl font-bold mb-4 text-center text-white">Comcast Buy Sell</h1>
+            <h1 className="text-3xl font-bold mb-4 text-center text-white">Comcast Buy & Sell</h1>
             <div className="w-full max-w-sm text-center">
                 <h1 className="text-2xl font-semibold mb-4 text-white">Login</h1>
                 <input
