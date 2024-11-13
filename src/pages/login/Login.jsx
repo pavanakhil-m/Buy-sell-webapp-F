@@ -51,10 +51,11 @@ const Login = () => {
     };
 
     return (
-        <section className="h-screen flex flex-col justify-center items-center space-y-10 my-2 mx-5 md:mx-0">
-            <h1 className="text-3xl font-bold mb-4 text-center">Menumate</h1>
-            <div className="md:w-1/3 max-w-sm text-center">
-                <h1 className="text-2xl font-semibold mb-4">Login</h1>
+        <div className="h-screen w-screen bg-slate-400">
+        <section className=" flex flex-col justify-center items-center absolute top-1/4 left-1/3 p-8 bg-slate-700 rounded-lg shadow-lg">
+            <h1 className="text-3xl font-bold mb-4 text-center text-white">Comcast Buy Sell</h1>
+            <div className="w-full max-w-sm text-center">
+                <h1 className="text-2xl font-semibold mb-4 text-white">Login</h1>
                 <input
                     className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded"
                     type="email" // Change type to 'email' for better validation
@@ -71,10 +72,10 @@ const Login = () => {
                     onChange={(e) => setPassword(e.target.value)} // Update state on change
                     required
                 />
-                {error && <p className="text-red-600">{error}</p>} {/* Display error */}
+                {error && <p className="text-red-400">{error}</p>} {/* Display error */}
                 <div className="mt-4 flex justify-between font-semibold text-sm">
                     <button
-                        className="text-blue-600 hover:text-blue-700 hover:underline hover:underline-offset-4 text-left"
+                        className="text-slate-300 hover:text-slate-200 hover:underline hover:underline-offset-4 text-left"
                         onClick={handleForgotPassword} // Handle forgot password
                     >
                         Forgot Password?
@@ -82,22 +83,23 @@ const Login = () => {
                 </div>
                 <div className="text-center">
                     <button
-                        className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider"
+                        className="mt-4 bg-green-600 hover:bg-green-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider"
                         type="submit"
                         onClick={onLogin}
                         disabled={loading} // Disable button when loading
                     >
-                        {loading ? 'Logging in...' : 'Get my Menu!'} {/* Show loading text */}
+                        {loading ? 'Logging in...' : 'Lets Go!'} {/* Show loading text */}
                     </button>
                 </div>
-                <div className="mt-4 font-semibold text-sm text-slate-500">
+                <div className="mt-4 font-semibold text-sm text-slate-300">
                     Don&apos;t have an account?{" "}
-                    <a className="text-red-300 hover:underline hover:underline-offset-4" href="http://localhost:5173/register">
+                    <a className="text-red-300 hover:underline hover:underline-offset-4 cursor-pointer" onClick={()=>{navigate('/register')} }>
                         Register
                     </a>
                 </div>
             </div>
         </section>
+        </div>
     );
 };
 

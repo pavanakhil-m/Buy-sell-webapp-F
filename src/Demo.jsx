@@ -14,7 +14,7 @@ import { FooterComponent } from "./components/FooterElement";
 function Demo() {
 
     const [category, setCategory] = useState({
-        Vehicles: false,
+        Vehicle: false,
         Electronics: false,
         Tickets: false,
         Clothing: false,
@@ -73,7 +73,19 @@ function Demo() {
         setRecentProducts((prevProducts) => [newProduct, ...prevProducts]);
     };
 
+    // function handleCategorySelect(selectedCategory) {
+    //     setCategory((prev) => {
+    //         const isCurrentlySelected = prev[selectedCategory];
+    //         const newCategoryState = Object.keys(prev).reduce((acc, key) => {
+    //             acc[key] = key === selectedCategory ? !isCurrentlySelected : false;
+    //             return acc;
+    //         }, {});
 
+    //         setSelectedCategory(isCurrentlySelected ? null : selectedCategory);
+    //         setProductCategoryHeading(isCategorySelected ? "Recently Added" : selectedCategory);
+    //         return newCategoryState;
+    //     });
+    // }
     function handleCategorySelect(selectedCategory) {
         setCategory((prev) => {
             const isCurrentlySelected = prev[selectedCategory];
@@ -81,12 +93,15 @@ function Demo() {
                 acc[key] = key === selectedCategory ? !isCurrentlySelected : false;
                 return acc;
             }, {});
-
+    
+            const newCategoryHeading = isCurrentlySelected ? "Recently Added" : selectedCategory;
+            setProductCategoryHeading(newCategoryHeading);
             setSelectedCategory(isCurrentlySelected ? null : selectedCategory);
-            setProductCategoryHeading(isCategorySelected ? "Recently Added" : selectedCategory);
+            
             return newCategoryState;
         });
     }
+    
 
     const isCategorySelected = selectedCategory !== null;
 

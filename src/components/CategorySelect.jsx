@@ -8,21 +8,10 @@ export const CategorySelect = ({ categoryName, onProdClick }) => {
     //setting heading name as category name
     // setHeading(categoryName);
 
-    const [resCardData, setResCardData] = useState(CardData); //initial array []
-    const [sortOption, setSortOption] = useState("all"); 
+    const token = localStorage.getItem("auth_token");
 
-    const getDataFromServer = async (sortType) => {
-        try {
-            const response = await axios.get(`our endpoint localhost`, {
-                params: {
-                    //need to check from backend and modify!
-                }
-            });
-            setResCardData(response.data);
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
-    };
+    const [resCardData, setResCardData] = useState([]); //initial array []
+    const [sortOption, setSortOption] = useState("all"); 
 
     useEffect(() => {
         getDataFromServer(sortOption);
@@ -30,6 +19,39 @@ export const CategorySelect = ({ categoryName, onProdClick }) => {
 
     const handleSortChange = (event) => {
         setSortOption(event.target.value);
+    };
+
+    const getDataFromServer = async (sortType) => {
+        let URI = "";
+        let reqParams = {};
+
+        if(sortType === "all") {
+             URI = `http://localhost:8080/products/category/${categoryName}`;
+             
+        }else if(sortType === "lowToHigh") {
+             URI = 'http://localhost:8080/products/sort/price';
+             reqParams = {order: 'asc'}
+        }else if(sortType === "highToLow") {
+             URI = 'http://localhost:8080/products/sort/price';
+             reqParams = {order: 'desc'}
+        }
+            
+        try {
+            //In axios 2nd parameter input is for configs like params and headers.
+            const response = await axios.get(URI, {
+                params: reqParams,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+    
+            //write logic to get data and save the json obj data which matchs to category name
+            setResCardData(response.data);
+        } catch (error) {
+            console.error("Error fetching data:", error.response?.data || error.message);
+        }
+        
     };
 
     return (

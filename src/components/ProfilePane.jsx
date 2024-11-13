@@ -1,7 +1,9 @@
 import React from 'react';
 import userPng from '../assets/images/userpng.png';
-
+import { useNavigate } from 'react-router-dom';
 export const ProfilePane = ({ isOpen, onClose }) => {
+
+    const navigate = useNavigate();
 
     //getting the username from local storage
     const empName = localStorage.getItem('user_name');
@@ -12,10 +14,11 @@ export const ProfilePane = ({ isOpen, onClose }) => {
         localStorage.removeItem('auth_token');
         localStorage.removeItem('nt_id');
         localStorage.removeItem('user_name');
-        window.location.reload();
+        navigate('/');
 
     }
 
+   
     return (
         <>
             {isOpen && (

@@ -19,6 +19,7 @@ export const NavBar = ({ onFormSelect, onProfileSelect }) => {
       const response = await axios.get(`endpoint`, {
         // params: 
       });
+      
       setSearchResults(response.data);
 
     } catch (err) {
@@ -31,16 +32,17 @@ export const NavBar = ({ onFormSelect, onProfileSelect }) => {
     setSearchResults([]);
   };
 
-  function handleSelect() {
+  function handleSelect(id) {
 
-    try {
-      const res = axios.get(`endpoint`, {
-        // params: 
-      });
-      setSelectedProductDetails(res.data);
-    } catch (err) {
-      console.error("Error fetching search:", err);
-    }
+    // try {
+    //   const res = axios.get(`endpoint`, {
+    //     // params: 
+    //   });
+    //   setSelectedProductDetails(res.data);
+    // } catch (err) {
+    //   console.error("Error fetching search:", err);
+    // }
+    setSelectedProductDetails(CardData.find((product) => product.productId === id));
   };
 
   return (
@@ -84,7 +86,7 @@ export const NavBar = ({ onFormSelect, onProfileSelect }) => {
         </div>
 
         {/* Display search results in a scrollable component */}
-        {searchResults.length > 0 && (
+        {CardData.length > 0 && (
           <div className="bg-white shadow-md rounded-lg p-4 mt-2 absolute w-full max-w-lg left-1/3 ml-20 transform -translate-x-1/2 z-40 max-h-80 overflow-y-auto">
             <div className="flex justify-between items-center mb-2">
               <h3 className="font-semibold text-gray-700">Search Results</h3>
@@ -96,7 +98,7 @@ export const NavBar = ({ onFormSelect, onProfileSelect }) => {
               </button>
             </div>
             <ul>
-              {searchResults.map((result, index) => (
+              {CardData.map((result, index) => (
                 <li key={index} className="p-2 border-b last:border-b-0"
                   onClick={() => handleSelect(result.productId)}>
                   {result.title} - {result.tag}
