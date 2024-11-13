@@ -7,6 +7,7 @@ export const ProfilePane = ({ isOpen, onClose }) => {
     const navigate = useNavigate();
     // Getting the username from local storage
     const empName = localStorage.getItem('user_name');
+    const name = empName.toUpperCase();
 
     function handleLogout() {
         // Removing the username and token from local storage for login
@@ -46,7 +47,7 @@ export const ProfilePane = ({ isOpen, onClose }) => {
             >
                 <div className='flex flex-col justify-center items-center mb-8'>
                     <img src={userPng} alt="User" className="w-24 h-24 rounded-full mt-8 mb-4" />
-                    <h1 className="text-white text-2xl">{empName}</h1>
+                    <h1 className="text-white text-2xl">{name}</h1>
                 </div>
 
                 <div className='flex flex-col justify-center items-center'>

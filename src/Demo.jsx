@@ -11,16 +11,26 @@ import { ProfilePane } from "./components/ProfilePane";
 import { FullProduct } from "./components/FullProduct";
 import { FooterComponent } from "./components/FooterElement";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function Demo() {
 
     const [category, setCategory] = useState({
-        Vehicle: false,
+        Vehicles: false,
         Electronics: false,
         Tickets: false,
-        Clothing: false,
-        Furniture: false,
-        Other: false,
+        Fashion: false,
+        Pets: false,
+        Others: false,
         Rentals: false,
+        Books: false,
+        Sports: false,
+        Games: false,
+        Toys: false,
+
+
+
     });
 
     const [formSelected, setFormSelected] = useState(false);
@@ -96,7 +106,9 @@ function Demo() {
 
     return (
         <>
+        <div className="bg-slate-200">
             <div className="relative">
+            
                 <NavBar onFormSelect={() => setFormSelected(true)} onProfileSelect={onProfileSelect} />
                 {formSelected && <SellForm onCrossSelect={() => setFormSelected(false)} onNewProductAdded={handleNewProductAdded} />}
                 <SlideShow />
@@ -137,6 +149,7 @@ function Demo() {
             </div>
 
             <FooterComponent />
+            </div>
         </>
 
     );

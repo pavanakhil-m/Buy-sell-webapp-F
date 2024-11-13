@@ -10,7 +10,6 @@ const CategoryData = [
     "Books",
     "Sports",
     "Games",
-    "Beauty",
     "Toys",
     "Others",
 ]

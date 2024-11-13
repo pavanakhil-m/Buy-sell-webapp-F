@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FullProduct } from './FullProduct';
-import logo from '../assets/images/logo-cbs.png';
+import logo from '../assets/images/logo-today-Photoroom.png';
 
 export const NavBar = ({ onFormSelect, onProfileSelect }) => {
   const [isShrunk, setIsShrunk] = useState(false);
@@ -10,6 +10,7 @@ export const NavBar = ({ onFormSelect, onProfileSelect }) => {
   const [selectedProductDetails, setSelectedProductDetails] = useState(null);
   const [noResultsMessage, setNoResultsMessage] = useState("");
   const userName = localStorage.getItem("user_name");
+  const name = userName.toUpperCase();
 
   // Debounce function to limit API calls during typing
   const debounce = (func, delay) => {
@@ -89,11 +90,11 @@ export const NavBar = ({ onFormSelect, onProfileSelect }) => {
 
   return (
     <>
-      <div className={`p-2 bg-slate-400 fixed left-1/2 transform transition-all duration-300 ease-in-out z-50 ${isShrunk ? '-translate-x-1/2 w-1/2 h-16 top-2 rounded-md' : '-translate-x-1/2 w-[calc(100%-1rem)] h-16 top-0 rounded-sm'}`}>
+      <div className={`p-2 bg-slate-400 fixed left-1/2 transform transition-all duration-300 ease-in-out z-50 ${isShrunk ? '-translate-x-1/2 w-1/2 h-16 top-2 rounded-md' : '-translate-x-1/2 w-[calc(100%-1rem)] h-20 top-0 rounded-sm'}`}>
         <div className="flex items-center h-full px-4">
           <div className="text-white font-bold w-1/6">
             <div className='w-20 h-22 object-fill'>
-              <img src={logo} alt='CIEC Buy Sell' />
+              <img src={logo} alt='CIEC Buy Sell' className='rounded-xl' />
             </div>
           </div>
 
@@ -102,7 +103,7 @@ export const NavBar = ({ onFormSelect, onProfileSelect }) => {
               <input
                 type="search"
                 className="w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Search Mockups, Logos..."
+                placeholder="Search for products.."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -113,13 +114,13 @@ export const NavBar = ({ onFormSelect, onProfileSelect }) => {
           </form>
 
           <div className="flex items-center w-2/6 justify-between pl-16">
-            <button>❤️</button>
-            <button className="bg-slate-300 text-slate-700 rounded-lg px-4 py-2" onClick={onFormSelect}>
+            <button className='bg-slate-300 text-slate-700 rounded-lg px-4 py-2 hover:bg-slate-700 hover:text-white '>❤️Products</button>
+            <button className="bg-slate-300 text-slate-700 rounded-lg px-4 py-2 hover:bg-slate-700 hover:text-white " onClick={onFormSelect}>
               Sell
             </button>
             {!isShrunk && (
-              <button onClick={onProfileSelect} className="text-white">
-                {userName}
+              <button className='bg-slate-300 text-slate-700 rounded-lg px-4 py-2 hover:bg-slate-700 hover:text-white ' onClick={onProfileSelect}>
+                {name}⚡
               </button>
             )}
           </div>

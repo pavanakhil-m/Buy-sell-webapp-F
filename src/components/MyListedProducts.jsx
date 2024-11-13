@@ -81,7 +81,7 @@ const MyListedProducts = () => {
                 <h3>{product.productName}</h3>
                 <p className="description">{product.description}</p>
                 <p className="category">Category: {product.category}</p>
-                <p className="price">Price: ${product.price.toFixed(2)}</p>
+                <p className="price">Price: ₹{product.price.toFixed(2)}</p>
               </div>
               <div className="product-actions">
                 <button className="btn-update">Update</button>

@@ -20,7 +20,7 @@ const formattedDateListed = new Date(dateListed).toLocaleDateString();
 
   return (
     <div className="box-border shadow-lg py-4 px-2 rounded-lg flex flex-col relative w-64
-                    transition-transform transform hover:scale-105 hover:shadow-xl"
+                    transition-transform transform hover:scale-105 hover:shadow-xl bg-slate-300"
          onClick={handleClick}>
       <div className="flex justify-center relative">
 
@@ -36,7 +36,7 @@ const formattedDateListed = new Date(dateListed).toLocaleDateString();
       </div>
 
         <h1 className="mt-4 text-lg font-semibold text-center">{productName}</h1>
-        <p className="mt-2 text-gray-800 text-center">{price}</p>
+        <p className="mt-2 text-gray-800 text-center">₹{price}</p>
    
       <div className="flex justify-between items-center mt-4 text-sm text-gray-500">
         {/* <span>Posted by: {employeeName}</span> */}
