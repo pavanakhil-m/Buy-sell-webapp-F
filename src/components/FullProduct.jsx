@@ -24,7 +24,7 @@ export const FullProduct = ({ product, onClose }) => {
                     ✕
                 </button>
                 <h1 className="text-2xl font-bold mb-4">{product.title}</h1>
-                <p className="text-gray-800 mb-2">Posted by: {product.employeeName}</p>
+                <p className="text-gray-800 mb-2">Posted by: {product.ntId}</p>
                 <p className="text-gray-500 mb-4">{product.datePosted}</p>
                 <img src={product.image || logoPng} alt="Product" className="w-full h-80 object-cover rounded-md" />
                 <p className="mt-4 text-gray-700">{product.description}</p>

@@ -92,7 +92,7 @@ const Login = () => {
                 </div>
                 <div className="mt-4 font-semibold text-sm text-slate-500">
                     Don&apos;t have an account?{" "}
-                    <a className="text-red-300 hover:underline hover:underline-offset-4" href="http://localhost:5173/register">
+                    <a className="text-red-300 hover:underline hover:underline-offset-4" onClick={()=>{navigate('/register')}}>
                         Register
                     </a>
                 </div>

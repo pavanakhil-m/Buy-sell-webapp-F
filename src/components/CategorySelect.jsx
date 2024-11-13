@@ -1,28 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Card } from "./Card";
-import { CardData } from "../data/CardData";
 
-// setHeading
 export const CategorySelect = ({ categoryName, onProdClick }) => {
-    //setting heading name as category name
-    // setHeading(categoryName);
+    const token = localStorage.getItem("auth_token");
 
-    const [resCardData, setResCardData] = useState(CardData); //initial array []
-    const [sortOption, setSortOption] = useState("all"); 
-
-    const getDataFromServer = async (sortType) => {
-        try {
-            const response = await axios.get(`our endpoint localhost`, {
-                params: {
-                    //need to check from backend and modify!
-                }
-            });
-            setResCardData(response.data);
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
-    };
+    const [resCardData, setResCardData] = useState([]); // Initial array []
+    const [sortOption, setSortOption] = useState("all");
 
     useEffect(() => {
         getDataFromServer(sortOption);
@@ -32,23 +16,55 @@ export const CategorySelect = ({ categoryName, onProdClick }) => {
         setSortOption(event.target.value);
     };
 
+    const getDataFromServer = async (sortType) => {
+        let URI = "";
+        let reqParams = "";
+        let fullURL = "";
+
+        if (sortType === "all") {
+            // Fetch products by category only
+            URI = `http://localhost:8080/products/category/${categoryName}`;
+            fullURL = URI;
+        } else if (sortType === "lowToHigh") {
+            // Fetch products in the category, sorted low to high
+            URI = 'http://localhost:8080/products/category/sort';
+            reqParams = `?category=${encodeURIComponent(categoryName)}&order=asc`;
+            fullURL = `${URI}${reqParams}`;
+        } else if (sortType === "highToLow") {
+            // Fetch products in the category, sorted high to low
+            URI = 'http://localhost:8080/products/category/sort';
+            reqParams = `?category=${encodeURIComponent(categoryName)}&order=desc`;
+            fullURL = `${URI}${reqParams}`;
+        }
+
+        try {
+            const response = await axios.get(fullURL, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            setResCardData(response.data);
+        } catch (error) {
+            console.error("Error fetching data:", error.response?.data || error.message);
+        }
+    };
+
     return (
         <>
-           
-            <div className="flex justify-center ">
+            <div className="flex justify-center">
                 <select
                     onChange={handleSortChange}
                     value={sortOption}
                     className="p-2 rounded-md bg-slate-500 text-white"
                 >
                     <option value="all">All Products</option>
-                    <option value="recent">Recently Added</option>
+                    <option value="recent">Newest Arrivals</option>
                     <option value="lowToHigh">Price: Low to High</option>
                     <option value="highToLow">Price: High to Low</option>
                 </select>
             </div>
 
-            
             <div className="flex flex-wrap justify-center gap-8 mt-4">
                 {resCardData.length > 0 ? (
                     resCardData.map((card, index) => (

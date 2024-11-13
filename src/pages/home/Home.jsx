@@ -11,14 +11,19 @@ import { useNavigate } from 'react-router-dom';
 
 const AppContent = () => {
 
-    const navigate = useNavigate();
-    const logout = () => {
-        setAuthHeader(null);
-        navigate("/");
+    // const navigate = useNavigate();
+    // const logout = () => {
+    //     setAuthHeader(null);
+    //     navigate("/");
         
-    }
+    // }
 
-
+    const logout = () => {
+        localStorage.removeItem("auth_token");
+        localStorage.removeItem("nt_id");
+        localStorage.removeItem("user_name");
+        navigate("/");  // Redirect to the login page
+    };
 
 
     return (
