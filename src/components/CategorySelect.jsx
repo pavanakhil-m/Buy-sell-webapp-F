@@ -24,22 +24,24 @@ export const CategorySelect = ({ categoryName, onProdClick }) => {
     const getDataFromServer = async (sortType) => {
         let URI = "";
         let reqParams = {};
+        let fullURL="";
 
         if(sortType === "all") {
              URI = `http://localhost:8080/products/category/${categoryName}`;
-             
+             fullURL = URI;
         }else if(sortType === "lowToHigh") {
-             URI = 'http://localhost:8080/products/sort/price';
-             reqParams = {order: 'asc'}
+             URI = 'http://localhost:8080/products/category/sort';
+             reqParams = `?category=${encodeURIComponent(categoryName)}&order=asc`;
+             fullURL = `${URI}${reqParams}`;
         }else if(sortType === "highToLow") {
-             URI = 'http://localhost:8080/products/sort/price';
-             reqParams = {order: 'desc'}
+             URI = 'http://localhost:8080/products/category/sort';
+             reqParams = `?category=${encodeURIComponent(categoryName)}&order=desc`;
+             fullURL = `${URI}${reqParams}`;
         }
             
         try {
             //In axios 2nd parameter input is for configs like params and headers.
-            const response = await axios.get(URI, {
-                params: reqParams,
+            const response = await axios.get(fullURL, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
@@ -64,7 +66,7 @@ export const CategorySelect = ({ categoryName, onProdClick }) => {
                     className="p-2 rounded-md bg-slate-500 text-white"
                 >
                     <option value="all">All Products</option>
-                    <option value="recent">Recently Added</option>
+                    <option value="recent">Recently Listed</option>
                     <option value="lowToHigh">Price: Low to High</option>
                     <option value="highToLow">Price: High to Low</option>
                 </select>

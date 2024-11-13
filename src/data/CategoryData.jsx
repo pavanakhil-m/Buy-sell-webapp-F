@@ -2,7 +2,7 @@
 
 const CategoryData = [
     "Electronics",
-    "Vehicle",
+    "Vehicles",
     "Tickets",
     "Rentals",
     "Fashion",

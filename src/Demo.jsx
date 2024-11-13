@@ -73,19 +73,6 @@ function Demo() {
         setRecentProducts((prevProducts) => [newProduct, ...prevProducts]);
     };
 
-    // function handleCategorySelect(selectedCategory) {
-    //     setCategory((prev) => {
-    //         const isCurrentlySelected = prev[selectedCategory];
-    //         const newCategoryState = Object.keys(prev).reduce((acc, key) => {
-    //             acc[key] = key === selectedCategory ? !isCurrentlySelected : false;
-    //             return acc;
-    //         }, {});
-
-    //         setSelectedCategory(isCurrentlySelected ? null : selectedCategory);
-    //         setProductCategoryHeading(isCategorySelected ? "Recently Added" : selectedCategory);
-    //         return newCategoryState;
-    //     });
-    // }
     function handleCategorySelect(selectedCategory) {
         setCategory((prev) => {
             const isCurrentlySelected = prev[selectedCategory];
@@ -94,7 +81,7 @@ function Demo() {
                 return acc;
             }, {});
     
-            const newCategoryHeading = isCurrentlySelected ? "Recently Added" : selectedCategory;
+            const newCategoryHeading = isCurrentlySelected ? "Recently Listed" : selectedCategory;
             setProductCategoryHeading(newCategoryHeading);
             setSelectedCategory(isCurrentlySelected ? null : selectedCategory);
             
@@ -105,7 +92,7 @@ function Demo() {
 
     const isCategorySelected = selectedCategory !== null;
 
-    const [productCategoryHeading, setProductCategoryHeading] = useState("Recently Added");
+    const [productCategoryHeading, setProductCategoryHeading] = useState("Recently Listed");
 
     return (
         <>

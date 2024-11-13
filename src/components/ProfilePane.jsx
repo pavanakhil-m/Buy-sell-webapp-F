@@ -1,6 +1,5 @@
 // ProfilePane.jsx
 import React from 'react';
-
 import userPng from '../assets/images/userpng.png';
 import { useNavigate } from 'react-router-dom';
 export const ProfilePane = ({ isOpen, onClose }) => {
@@ -38,6 +37,12 @@ export const ProfilePane = ({ isOpen, onClose }) => {
                 className={`fixed top-0 right-0 h-screen w-1/4 bg-slate-600 z-50 transition-transform duration-500 ${
                     isOpen ? 'translate-x-0' : 'translate-x-full'
                 }`}
+                style={{
+                    transform: isOpen ? 'scale(1)' : 'scale(0.75)',
+                    width: isOpen ? '25%' : '12.5%',
+                    height: isOpen ? '100%' : '50%',
+                    overflow: 'hidden',
+                }}
             >
                 <div className='flex flex-col justify-center items-center mb-8'>
                     <img src={userPng} alt="User" className="w-24 h-24 rounded-full mt-8 mb-4" />
