@@ -2,93 +2,196 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  font-family: 'Arial', sans-serif;
 }
 
 .title {
-  font-size: 24px;
-  margin-bottom: 20px;
+  font-size: 36px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 40px;
   text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  position: relative;
+  padding: 10px 0;
+  border-bottom: 4px solid #007bff; /* Blue border under the title */
+}
+
+.title span {
+  color: #007bff; /* Highlight the word "Products" */
 }
 
 .product-list {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  width: 80%; /* Adjust width as needed */
+  width: 100%;
+  max-width: 1200px; /* Ensures the products aren't stretched on larger screens */
 }
 
 .product-item {
-  margin: 10px 0;
+  margin: 30px 0;
+  padding: 10px;
+  transition: transform 0.3s ease;
+}
+
+.product-item:hover {
+  transform: scale(1.03);
 }
 
 .product-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
+  padding: 20px;
   border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.product-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
 }
 
 .product-left {
   flex-shrink: 0;
+  margin-right: 20px;
 }
 
 .product-image {
-  width: 100px;
-  height: 100px;
+  width: 140px;
+  height: 140px;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 12px;
+  border: 2px solid #ddd;
+  transition: transform 0.3s ease;
+}
+
+.product-image:hover {
+  transform: scale(1.1);
 }
 
 .product-details {
   flex: 1;
-  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  color: #333;
 }
 
 .product-details h3 {
-  font-size: 18px;
-  margin: 5px 0;
+  font-size: 24px;
+  margin: 12px 0;
+  font-weight: 600;
+  color: #007bff;
+  text-transform: capitalize;
 }
 
-.product-details .description,
+.product-details .description {
+  font-size: 16px;
+  margin: 5px 0;
+  color: #555;
+  line-height: 1.6;
+}
+
 .product-details .category,
 .product-details .price {
-  margin: 2px 0;
-  font-size: 14px;
-  color: #555;
+  font-size: 18px;
+  margin: 6px 0;
+  color: #333;
 }
 
 .product-actions {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   align-items: flex-end;
+  margin-left: 20px;
 }
 
-.btn-update,
-.btn-delete {
-  padding: 8px 12px;
-  margin: 4px 0;
+.product-actions .btn-update,
+.product-actions .btn-delete {
+  padding: 12px 18px;
+  margin-bottom: 10px;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 130px;
+  text-align: center;
 }
 
-.btn-update {
+.product-actions .btn-update {
   background-color: #007bff;
   color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 123, 255, 0.3);
+  transform: scale(1);
 }
 
-.btn-delete {
+.product-actions .btn-update:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+}
+
+.product-actions .btn-delete {
   background-color: #dc3545;
   color: #fff;
+  box-shadow: 0 2px 5px rgba(220, 53, 69, 0.3);
+  transform: scale(1);
 }
 
-.btn-update:hover {
-  background-color: #0056b3;
-}
-
-.btn-delete:hover {
+.product-actions .btn-delete:hover {
   background-color: #c82333;
+  transform: translateY(-3px);
+}
+
+.error {
+  color: #dc3545;
+  font-size: 16px;
+  margin-top: 20px;
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .product-card {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .product-left {
+    margin-bottom: 15px;
+  }
+
+  .product-details {
+    text-align: center;
+  }
+
+  .product-actions {
+    align-items: center;
+    margin-top: 15px;
+  }
+
+  .product-image {
+    width: 120px;
+    height: 120px;
+  }
+
+  .btn-update,
+  .btn-delete {
+    width: 100%;
+    margin: 5px 0;
+  }
 }
