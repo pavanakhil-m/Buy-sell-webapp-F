@@ -65,8 +65,7 @@ export const CategorySelect = ({ categoryName, onProdClick }) => {
                     value={sortOption}
                     className="p-2 rounded-md bg-slate-500 text-white"
                 >
-                    <option value="all">All Products</option>
-                    <option value="recent">Recently Listed</option>
+                    <option value="all">Sort</option>
                     <option value="lowToHigh">Price: Low to High</option>
                     <option value="highToLow">Price: High to Low</option>
                 </select>

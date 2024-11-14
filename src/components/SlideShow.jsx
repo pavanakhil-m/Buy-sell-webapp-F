@@ -3,7 +3,7 @@ import {Carousel} from 'react-responsive-carousel'
 import a1 from "../assets/images/asset1.jpg"
 import a2 from "../assets/images/asset2.jpg"
 import a3 from "../assets/images/asset3.jpg"
-import a4 from "../assets/images/asset4.jpeg"
+import a4 from "../assets/images/asset4.jpg"
 import "./SlideStyle.css"
 
 export const SlideShow = () => {

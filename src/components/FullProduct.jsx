@@ -8,7 +8,9 @@ export const FullProduct = ({ product, onClose }) => {
 
     const token = localStorage.getItem('auth_token');
 
+
     const { id, ntId, productName, description, purchaseDate, dateListed, category, image, price } = product;
+    console.log(product)
 
     let truncatedDate = purchaseDate.substring(0, 11);
     let name = productName.toUpperCase();
@@ -32,7 +34,7 @@ export const FullProduct = ({ product, onClose }) => {
         // successToast();
         // onClose();
         // closingTime();
-
+       // http://localhost:8080/notifications/send-interest
 
         try {
             const response = await axios.post('http://localhost:8080/notifications/send-interest', fromDetails, {
@@ -57,7 +59,7 @@ export const FullProduct = ({ product, onClose }) => {
     return (
         <>
             
-            <ToastContainer position="bottom-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} draggable />
+            <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} draggable />
 
             <div
                 className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
@@ -71,7 +73,7 @@ export const FullProduct = ({ product, onClose }) => {
                         ✕
                     </button>
                     <div className='flex justify-center mb-6 px-16 py-4 bg-slate-300 shadow-md'>
-                        <h1 className='text-lg font-semibold px-12'>{category}</h1>
+                        <h1 className='text-lg font-semibold px-12'>Category: {category}</h1>
                         <h1 className='text-lg font-medium'>Listed on: {truncatedDate}</h1>
                     </div>
 
