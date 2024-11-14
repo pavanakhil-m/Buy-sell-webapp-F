@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import axios from 'axios';
 import { Card } from "./components/Card";
 import { Category } from "./components/Category";
@@ -13,6 +13,10 @@ import { FooterComponent } from "./components/FooterElement";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+export const ToastContext = createContext({
+    triggerToast: () => {}
+});
 
 function Demo() {
 
@@ -104,8 +108,30 @@ function Demo() {
 
     const [productCategoryHeading, setProductCategoryHeading] = useState("Recently Listed");
 
+    // const [sellFormClicked, setSellFormClicked] = useState(false);
+
+    // const successToast = () => {
+    //     console.log("Toast triggered"); // Check if this logs
+    //     toast.success("Successfully added item!");
+    // };
+
+    // useEffect(() => {
+    //     if (sellFormClicked) {
+    //         toast.success("Successfully added item!");
+    //         setSellFormClicked(false); 
+    //     }
+    // }, [sellFormClicked]);
+
+    const triggerToast = (message) => toast.success(message);
+    
+
+    // const [imIntrestedClicked, setImIntrestedClicked] = useState(false);
+
     return (
         <>
+        <ToastContext.Provider value={{triggerToast}}>
+        <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} draggable />
+
         <div className="bg-slate-200">
             <div className="relative">
             
@@ -150,6 +176,7 @@ function Demo() {
 
             <FooterComponent />
             </div>
+        </ToastContext.Provider>
         </>
 
     );

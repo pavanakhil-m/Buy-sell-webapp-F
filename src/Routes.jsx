@@ -5,7 +5,16 @@ import Demo from './Demo';
 import ErrorPage  from './pages/error/ErrorPage';
 import  Register  from './pages/register/Register';
 
-export const ErrorContext = createContext();
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
+export const ErrorContext = createContext(
+    {
+        setToastError: () => {}
+    }
+);
+
 
 
 import ListedItemsPage from './components/MyListedProducts';
@@ -14,9 +23,12 @@ import ListedItemsPage from './components/MyListedProducts';
 const AppRoutes = () => {
 
     const [errorInfo, setErrorInfo] = useState('');
+
+    const setToastError = (msg) => toast.error(msg);
     
     return (
-        <ErrorContext.Provider value={{errorInfo, setErrorInfo}}>
+        
+        <ErrorContext.Provider value={{errorInfo, setErrorInfo,setToastError}}>
         <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />

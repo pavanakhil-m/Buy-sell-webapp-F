@@ -1,30 +1,35 @@
 import logoPng from '../assets/images/bgdrop.png';
 import axios from 'axios';
+import { useContext } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ToastContext } from '../Demo';
 
 export const FullProduct = ({ product, onClose }) => {
     if (!product) return null;
 
     const token = localStorage.getItem('auth_token');
 
+    const toastCtx = useContext(ToastContext);
+
 
     const { id, ntId, productName, description, purchaseDate, dateListed, category, image, price } = product;
     console.log(product)
+    // const numId = (id);
 
     let truncatedDate = purchaseDate.substring(0, 11);
     let name = productName.toUpperCase();
 
-    const successToast = () => {
-        console.log("Toast triggered"); 
-        toast.success("Notified Seller successfully!");
-    };
+    // const successToast = () => {
+    //     console.log("Toast triggered"); 
+    //     toast.success("Notified Seller successfully!");
+    // };
 
-    function closingTime(){
-        setTimeout(() => {
-            onClose();
-        }, 3000);
-    }
+    // function closingTime(){
+    //     setTimeout(() => {
+    //         onClose();
+    //     }, 3000);
+    // }
 
     async function handleInterested() {
         console.log("I'm Interested");
@@ -44,8 +49,10 @@ export const FullProduct = ({ product, onClose }) => {
                 }
             });
             console.log(response.data);
-            successToast();
-            closingTime();
+            toastCtx.triggerToast("Notified Seller successfully!");
+            // successToast();
+            // closingTime();
+            onClose();
 
         } catch (error) {
             console.error('Error sending interest:', error);
@@ -59,7 +66,6 @@ export const FullProduct = ({ product, onClose }) => {
     return (
         <>
             
-            <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} draggable />
 
             <div
                 className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"

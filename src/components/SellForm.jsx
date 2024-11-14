@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ToastContext } from '../Demo';
 
 export const SellForm = ({ onCrossSelect, onNewProductAdded }) => {
+
+    const toastCtx = useContext(ToastContext);
+
     const [productName, setProductName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
@@ -23,16 +27,16 @@ export const SellForm = ({ onCrossSelect, onNewProductAdded }) => {
             return;
         }
 
-        function closingTime(){
-            setTimeout(() => {
-                onCrossSelect();
-            }, 3000);
-        }
+        // function closingTime(){
+        //     setTimeout(() => {
+        //         onCrossSelect();
+        //     }, 3000);
+        // }
 
-        const successToast = () => {
-            console.log("Toast triggered"); // Check if this logs
-            toast.success("Successfully added item!");
-        };
+        // const successToast = () => {
+        //     console.log("Toast triggered"); // Check if this logs
+        //     toast.success("Successfully added item!");
+        // };
 
         const formData = new FormData();
         formData.append('ntId', ntId);
@@ -51,11 +55,12 @@ export const SellForm = ({ onCrossSelect, onNewProductAdded }) => {
                 }
             });
 
-            successToast();
+            toastCtx.triggerToast("Successfully added item!");
+            // successToast();
             console.log('Product added:', response.data);
             onNewProductAdded(response.data); // Notify parent component of new product
-            // onCrossSelect();
-            closingTime();
+            onCrossSelect();
+            // closingTime();
         } catch (error) {
             console.error('Error adding product:', error);
         }
@@ -63,7 +68,7 @@ export const SellForm = ({ onCrossSelect, onNewProductAdded }) => {
 
     return (
         <>
-            <ToastContainer position="bottom-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} draggable />
+            {/* <ToastContainer position="bottom-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} draggable /> */}
 
             <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
                 <div className="relative w-full max-w-md mx-auto p-4 bg-white rounded-lg shadow-lg">

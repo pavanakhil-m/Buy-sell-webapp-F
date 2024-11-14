@@ -265,7 +265,8 @@ export const NavBar = ({ onFormSelect, onProfileSelect }) => {
         <div className="flex items-center justify-between h-full px-4 space-x-4 sm:space-x-8">
           {/* Logo centered in the navbar */}
           <div className="text-white font-bold flex-grow flex justify-center sm:justify-start">
-            <div className='w-16 sm:w-20 h-30 sm:h-22 object-fill'>
+            <div className='w-16 sm:w-20 h-30 sm:h-22 object-fill cursor-pointer'
+                onClick={()=>{window.location.reload()}}>
               <img src={logo} alt='CIEC Buy Sell' className='rounded-xl' />
             </div>
           </div>
