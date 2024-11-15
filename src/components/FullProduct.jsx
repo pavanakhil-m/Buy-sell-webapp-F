@@ -42,6 +42,11 @@ export const FullProduct = ({ product, onClose }) => {
        // http://localhost:8080/notifications/send-interest
 
         try {
+            
+            toastCtx.triggerToast("Notified Seller successfully!");
+            // successToast();
+            // closingTime();
+            onClose();
             const response = await axios.post('http://localhost:8080/notifications/send-interest', fromDetails, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
@@ -49,10 +54,6 @@ export const FullProduct = ({ product, onClose }) => {
                 }
             });
             console.log(response.data);
-            toastCtx.triggerToast("Notified Seller successfully!");
-            // successToast();
-            // closingTime();
-            onClose();
 
         } catch (error) {
             console.error('Error sending interest:', error);
